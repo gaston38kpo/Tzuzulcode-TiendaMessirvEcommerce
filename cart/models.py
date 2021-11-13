@@ -1,15 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import User
+from products.models import Product
 
 # Create your models here.
 
-class Cart(models.Model):
-    """ Model to represent shopping cart """
-    cart_id = models.BigAutoField()
-    username = models.OneToOneField("User")
-    discount_code = models.ManyToOneRel("DiscountCode")
-    products = models.ManyToManyRel()
-
 class DiscountCode(models.Model):
     """ Model to represent discount codes """
-    code = models.BigAutoField()
-    discount = models.IntegerField()
+    code = models.CharField(primary_key=True, max_length=32)
+    discount = models.PositiveIntegerField()
+
+class Cart(models.Model):
+    """ Model to represent shopping cart """
+    id = models.BigAutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    discount_code = models.ManyToOneRel(DiscountCode, field_name="discount_code", to="code", on_delete=models.CASCADE)
+    products = models.ManyToManyRel(Product, to="id")
