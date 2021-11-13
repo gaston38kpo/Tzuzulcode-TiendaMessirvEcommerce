@@ -11,13 +11,12 @@ class DiscountCode(models.Model):
 
 class Cart(models.Model):
     """ Model to represent shopping cart """
-    id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product, through='CartProduct')
 
 
 class CartProduct(models.Model):
-    cart_id = models.ForeignKey(Cart,on_delete=models.CASCADE)
-    product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
+    cart_fk = models.ForeignKey(Cart,on_delete=models.CASCADE)
+    product_fk = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
