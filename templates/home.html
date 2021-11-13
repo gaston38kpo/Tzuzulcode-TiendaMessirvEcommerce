@@ -8,12 +8,18 @@
 </head>
 <body>
     <div>LOGO</div>
+    
     {% if request.user.is_authenticated %}
         <div><a href="/logout">LOGOUT</a></div>
     {% else %}
         <div><a href="/login">LOGIN</a></div>
     {% endif %}
     <div><a href="/register">REGISTER</a></div>
+    
+    {% if request.user.is_staff %}
+        <div><a href="/admin">ADMIN AREA</a></div>
+    {% endif %}
+
     <div>FILTER</div>
 
     <div>
@@ -29,6 +35,8 @@
         </div>
         {% endfor %}
     </div>
+
     <div><a href="/cart">CART</a></div>
+    
 </body>
 </html>
