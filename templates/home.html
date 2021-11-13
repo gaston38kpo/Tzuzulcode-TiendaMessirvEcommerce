@@ -25,7 +25,7 @@
     <div>
         {% for product in products %}
         <div>
-            <img src={{product.image_url}}>
+            <img src={{product.img_path}}>
             <p>Name: {{product.name}}</p>
             <p>Price: {{product.price}}</p>
             {% if product.stock == 0 %}
