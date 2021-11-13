@@ -21,7 +21,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="{% url 'cart' %}">Home</a>
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
             </div>
         </div>
     </div>
@@ -43,12 +43,12 @@
             </tr>
         </thead>
         <tbody>
-            {% for product_cart in cart.products.all %}
+            {% for product_cart in cart %}
             <tr>
                 <td>{{ product_cart.name }}</td>
                 <td scope="row">{{ product_cart.price }}</td>
                 <td>
-                    <a class="btn btn-danger btn-sm" href="{% url 'delete_cart_item' product_cart.id %}">Eliminar</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_product_to_cart' product_cart.id %}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
