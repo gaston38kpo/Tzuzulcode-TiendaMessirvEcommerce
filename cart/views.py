@@ -3,8 +3,8 @@ from cart.models import Cart
 
 # Create your views here.
 def cart_view(request):
-    cart = Cart.objects.filter(user=request.user)
-    return render(request, 'cart.html', {'cart': cart})
+    cart = Cart.objects.filter(user=request.user)[0]
+    return render(request, 'cart.html', context={'cart': cart})
         
 
 def delete_cart_item(request, cart_item_id):
