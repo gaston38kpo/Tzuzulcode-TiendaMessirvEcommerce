@@ -8,7 +8,11 @@
 </head>
 <body>
     <div>LOGO</div>
-    <div><a href="/login">LOGIN</a></div>
+    {% if request.user.is_authenticated %}
+        <div><a href="/logout">LOGOUT</a></div>
+    {% else %}
+        <div><a href="/login">LOGIN</a></div>
+    {% endif %}
     <div><a href="/register">REGISTER</a></div>
     <div>FILTER</div>
     <div>PRODUCTS</div>
