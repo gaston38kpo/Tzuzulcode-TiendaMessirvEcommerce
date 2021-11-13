@@ -1,13 +1,26 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from products.models import Product
 
 from django.views import generic
 
 # Create your views here.
 
-class Home(generic.TemplateView):
-    template_name = 'home.html'
+def home_view(request):
+    context = {}
+    
+    context["products"] = Product.objects.all()
+
+    return render(request, 'home.html', context=context)
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('home') 
 
 def login_view(request):
     if(request.method == 'POST'):

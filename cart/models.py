@@ -1,6 +1,6 @@
 from django.db import models
-from ..products.models import Product
-from ..usuarios.models import Customer
+from products.models import Product
+from usuarios.models import Customer
 
 class Cart_item(models.Model):
     cart_item_id = models.AutoField(primary_key=True)

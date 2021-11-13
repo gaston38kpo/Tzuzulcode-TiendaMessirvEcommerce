@@ -7,6 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>WELCOME {{ request.user.username }}</h1>
+    <div>LOGO</div>
+    
+    {% if request.user.is_authenticated %}
+        <div><a href="/logout">LOGOUT</a></div>
+    {% else %}
+        <div><a href="/login">LOGIN</a></div>
+    {% endif %}
+    <div><a href="/register">REGISTER</a></div>
+    
+    {% if request.user.is_staff %}
+        <div><a href="/admin">ADMIN AREA</a></div>
+    {% endif %}
+
+    <div>FILTER</div>
+
+    <div>
+        {% for product in products %}
+        <div>
+            <img src={{product.image_url}}>
+            <p>Name: {{product.name}}</p>
+            <p>Price: {{product.price}}</p>
+            {% if product.stock == 0 %}
+                <p>OUT OF STOCK</p>
+            {% endif %}            
+            <p>Description: {{product.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div><a href="/cart">CART</a></div>
+    
 </body>
 </html>

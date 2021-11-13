@@ -6,8 +6,8 @@ class Product(models.Model):
     description = models.TextField(max_length=1000)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image_url = models.CharField(max_length=255)
-    stock = models.IntegerField()
+    stock = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.name
+        return f"id:{self.product_id} ({self.stock}) {self.name} {self.price}$"
         

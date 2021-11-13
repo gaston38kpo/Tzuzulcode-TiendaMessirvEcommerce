@@ -1,5 +1,5 @@
 from django.db import models
-from ..usuarios.models import Customer
+from usuarios.models import Customer
 
 class Order_detail(models.Model):
     order_detail_id = models.AutoField(primary_key=True)
