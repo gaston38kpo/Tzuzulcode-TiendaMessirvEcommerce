@@ -13,5 +13,5 @@ class Cart(models.Model):
     """ Model to represent shopping cart """
     id = models.BigAutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    discount_code = models.ManyToOneRel(DiscountCode, field_name="discount_code", to="code", on_delete=models.CASCADE)
-    products = models.ManyToManyRel(Product, to="id")
+    discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True)
+    products = models.ManyToManyField(Product)
