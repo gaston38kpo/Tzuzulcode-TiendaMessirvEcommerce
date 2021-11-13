@@ -15,7 +15,20 @@
     {% endif %}
     <div><a href="/register">REGISTER</a></div>
     <div>FILTER</div>
-    <div>PRODUCTS</div>
+
+    <div>
+        {% for product in products %}
+        <div>
+            <img src={{product.image_url}}>
+            <p>Name: {{product.name}}</p>
+            <p>Price: {{product.price}}</p>
+            {% if product.stock == 0 %}
+                <p>OUT OF STOCK</p>
+            {% endif %}            
+            <p>Description: {{product.description}}</p>
+        </div>
+        {% endfor %}
+    </div>
     <div><a href="/cart">CART</a></div>
 </body>
 </html>

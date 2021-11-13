@@ -17,15 +17,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from usuarios.views import Home
+from usuarios.views import home_view
 from usuarios.views import login_view
 from usuarios.views import logout_view
 from usuarios.views import register_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', Home.as_view(), name='home'),
-    path('', Home.as_view(), name='home'),
+    path('home/', home_view, name='home'),
+    path('', home_view, name='home'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
