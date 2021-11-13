@@ -23,6 +23,7 @@ from usuarios.views import login_view, register_view, Home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', Home.as_view(), name='home'),
+    path('', Home.as_view(), name='home'),
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
 ] + static(settings.STATIC_URL)
