@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from .models import Cart
 from .models import CartProduct
 from products.models import Product
-
+from orders.models import Order, OrderProduct
 # Errors 
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseNotAllowed
