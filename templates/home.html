@@ -13,8 +13,8 @@
         <div><a href="/logout">LOGOUT</a></div>
     {% else %}
         <div><a href="/login">LOGIN</a></div>
+        <div><a href="/register">REGISTER</a></div>
     {% endif %}
-    <div><a href="/register">REGISTER</a></div>
     
     {% if request.user.is_staff %}
         <div><a href="/admin">ADMIN AREA</a></div>
@@ -25,13 +25,18 @@
     <div>
         {% for product in products %}
         <div>
-            <img src={{product.image_url}}>
+            <img src={{product.img_path}}>
             <p>Name: {{product.name}}</p>
             <p>Price: {{product.price}}</p>
             {% if product.stock == 0 %}
                 <p>OUT OF STOCK</p>
             {% endif %}            
             <p>Description: {{product.description}}</p>
+            <form action="/cart/add/{{product.id}}", method="POST">
+                {% csrf_token %}
+                <input type="number", name="quantity", placeholder="Quantity", min=0>
+                <button>Add to Cart</button>
+            </form>
         </div>
         {% endfor %}
     </div>

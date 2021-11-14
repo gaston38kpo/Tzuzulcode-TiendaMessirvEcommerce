@@ -12,7 +12,7 @@ class DiscountCode(models.Model):
 class Cart(models.Model):
     """ Model to represent shopping cart """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True)
+    discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True, blank=True)
     products = models.ManyToManyField(Product, through='CartProduct')
 
 

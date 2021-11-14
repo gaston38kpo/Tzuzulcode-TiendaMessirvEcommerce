@@ -21,6 +21,7 @@ from usuarios.views import home_view
 from usuarios.views import login_view
 from usuarios.views import logout_view
 from usuarios.views import register_view
+from cart.views import add_product_to_cart
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,5 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
+    path('cart/add/<int:product_id>', add_product_to_cart, name='add_product_to_cart'),
 ] + static(settings.STATIC_URL)
