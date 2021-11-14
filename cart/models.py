@@ -25,10 +25,19 @@ class Cart(models.Model):
 class CartProduct(models.Model):
     cart_fk = models.ForeignKey(Cart,on_delete=models.CASCADE)
     product_fk = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField()    
+    # Atributo estatico que no esta en la BD
+    total=0
 
     def __str__(self):
         return f"id: {self.id} price: ${self.product_fk.price} quantity: ({self.quantity})"
     
     def subtotal(self):
-        return self.quantity * self.product_fk.price
+        result = self.quantity * self.product_fk.price
+        CartProduct.total += result
+        return result
+    
+    def reset_total(self):
+        CartProduct.total = 0
+        return
+    
