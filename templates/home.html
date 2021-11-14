@@ -20,22 +20,6 @@
         <div><a href="/admin">ADMIN AREA</a></div>
     {% endif %}
 
-    <div>FILTER</div>
-
-    <div>
-        {% for product in products %}
-        <div>
-            <img src={{product.img_path}}>
-            <p>Name: {{product.name}}</p>
-            <p>Price: {{product.price}}</p>
-            {% if product.stock == 0 %}
-                <p>OUT OF STOCK</p>
-            {% endif %}            
-            <p>Description: {{product.description}}</p>
-        </div>
-        {% endfor %}
-    </div>
-
     <div><a href="/cart">CART</a></div>
     <div><a href="/orders">ORDERS</a></div>
 

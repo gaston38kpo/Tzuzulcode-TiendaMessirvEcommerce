@@ -21,9 +21,10 @@ from usuarios.views import home_view
 from usuarios.views import login_view
 from usuarios.views import logout_view
 from usuarios.views import register_view
-from cart.views import cart_view
+from cart.views import add_order, cart_view
 from cart.views import delete_product_from_cart
 from cart.views import sort_cart_products
+from orders.views import order_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,5 +39,8 @@ urlpatterns = [
     path('cart/', cart_view, name='cart'),
     path('cart/del/<int:cart_product_id>/', delete_product_from_cart, name='delete_product_from_cart'),
     path('cart/sort/<str:sort>/', sort_cart_products, name='sort_cart_products'),
+    path('cart/add_order', add_order, name='add_order'),
+
+    path('orders/', order_view, name='orders')
     
 ] + static(settings.STATIC_URL)

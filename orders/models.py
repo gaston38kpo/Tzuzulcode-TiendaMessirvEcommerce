@@ -11,7 +11,7 @@ class Order(models.Model):
     products = models.ManyToManyField(Product, through='OrderProduct')
 
     def __str__(self):
-        return f"{self.id} {self.order_fk.user_fk.username} ${self.order_fk.total}"
+        return f"Order: {self.id} {self.user_fk.username} ${self.total}"
         
 
 class OrderProduct(models.Model):
