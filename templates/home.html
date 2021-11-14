@@ -11,15 +11,19 @@
     <div><img src="{% static 'img/logo.png' %}", alt="LOGO"></div>
     
     {% if request.user.is_authenticated %}
-        <div><a href="/logout">LOGOUT</a></div>
+        <div>
+            {{request.user.username}}
+            <a href="/logout">LOGOUT</a>
+            
+            {% if request.user.is_staff %}
+                <a href="/admin">ADMIN AREA</a>
+            {% endif %}
+        </div>
     {% else %}
         <div><a href="/login">LOGIN</a></div>
         <div><a href="/register">REGISTER</a></div>
     {% endif %}
     
-    {% if request.user.is_staff %}
-        <div><a href="/admin">ADMIN AREA</a></div>
-    {% endif %}
 
     <div>FILTER</div>
 
