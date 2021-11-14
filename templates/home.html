@@ -5,33 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {% load static %}
 </head>
 <body>
-    <div>LOGO</div>
+    <div><img src="{% static 'img/logo.png' %}", alt="LOGO"></div>
     
     {% if request.user.is_authenticated %}
-        <div><a href="/logout">LOGOUT</a></div>
+        <div>
+            {{request.user.username}}
+            <a href="/logout">LOGOUT</a>
+            
+            {% if request.user.is_staff %}
+                <a href="/admin">ADMIN AREA</a>
+            {% endif %}
+        </div>
     {% else %}
         <div><a href="/login">LOGIN</a></div>
+        <div><a href="/register">REGISTER</a></div>
     {% endif %}
-    <div><a href="/register">REGISTER</a></div>
     
-    {% if request.user.is_staff %}
-        <div><a href="/admin">ADMIN AREA</a></div>
-    {% endif %}
 
     <div>FILTER</div>
 
     <div>
         {% for product in products %}
         <div>
-            <img src={{product.image_url}}>
+            <img src={{product.img_path}}>
             <p>Name: {{product.name}}</p>
             <p>Price: {{product.price}}</p>
             {% if product.stock == 0 %}
                 <p>OUT OF STOCK</p>
             {% endif %}            
             <p>Description: {{product.description}}</p>
+            <form action="/cart/add/{{product.id}}", method="POST">
+                {% csrf_token %}
+                <input 
+                    type="number", 
+                    name="quantity", 
+                    placeholder="Quantity", 
+                    max="{{product.stock}}",
+                    min="0">
+                <button>Add to Cart</button>
+            </form>
         </div>
         {% endfor %}
     </div>
