@@ -132,9 +132,11 @@ def add_order(request):
             quantity = cart_product.quantity,
         ) 
         order_product.save()
+        new_stock = cart_product.product_fk.stock - cart_product.quantity
+        Product.objects.filter(id=cart_product.product_fk.id).update(stock=new_stock)
+        cart_product.product_fk.stock
         cart_product.delete()
        
-    #TODO:Incluir lógica para descontar del inventario
     
     return redirect('orders')
 
