@@ -60,7 +60,25 @@
                 <tr>
                     <td class= "align-middle" scope="row">{{ product_cart.product_fk.name }}</td>
                     <td class= "align-middle" scope="row"> $ {{ product_cart.product_fk.price }}</td>
-                    <td class= "align-middle" scope="row">{{ product_cart.quantity }}</td>
+                    <td class= "align-middle">
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-6">
+                                    {{ product_cart.quantity }}
+                                </div>
+                                <div class="col-6">
+                                    <div class="btn-group-vertical" role="group">
+                                        <a  href="{% url 'add_remove_one_product' 'add_product' product_cart.product_fk.id %}" class="text-success">
+                                            <i class="bi bi-arrow-up-circle-fill"></i>
+                                        </a>
+                                        <a  href="{% url 'add_remove_one_product' 'remove_product' product_cart.product_fk.id %}" class="text-light">
+                                            <i class="bi bi-arrow-down-circle-fill"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     <td class= "align-middle" scope="row"> $ {{ product_cart.subtotal }}</td>
                     <td>
                         <div class="row align-items-center">

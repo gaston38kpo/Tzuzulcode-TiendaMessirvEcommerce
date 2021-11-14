@@ -137,3 +137,20 @@ def add_order(request):
     #TODO:Incluir lógica para descontar del inventario
     
     return redirect('orders')
+
+
+def add_remove_one_product(request, quantity_func, product_id):
+    cart = Cart.objects.filter(user=request.user).get()
+    cart_product = CartProduct.objects.filter(cart_fk=cart.id, product_fk = product_id)
+    product = Product.objects.filter(id=product_id)
+
+    quantity = cart_product.get().quantity
+    if quantity_func == "add_product":
+        if quantity < product.get().stock:
+            cart_product.update(quantity=quantity+1)
+    elif quantity_func == "remove_product":
+        if quantity > 1:
+            cart_product.update(quantity=quantity-1)
+        
+    return redirect('cart')
+    
