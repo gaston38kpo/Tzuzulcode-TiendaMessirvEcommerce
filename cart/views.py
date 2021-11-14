@@ -137,4 +137,3 @@ def add_order(request):
     #TODO:Incluir lógica para descontar del inventario
     
     return redirect('orders')
-    return redirect('orders')
