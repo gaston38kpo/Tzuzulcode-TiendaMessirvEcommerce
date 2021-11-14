@@ -6,7 +6,7 @@ def cart_view(request):
     cart = Cart.objects.filter(user=request.user).get()
     cart_products = CartProduct.objects.filter(cart_fk=cart.id).all()
 
-    return render(request, 'cart.html', context={'cart': cart, 'cart_products': cart_products})
+    return render(request, 'cart.html', context={'cart_products': cart_products})
         
 
 def delete_product_from_cart(request, cart_product_id):
@@ -28,4 +28,4 @@ def sort_cart_products(request, sort):
     elif sort == 'name_desc':
         cart_products = cart_products.order_by('-product_fk__name')
 
-    return render(request, 'cart.html', context={'cart': cart, 'cart_products': cart_products})
+    return render(request, 'cart.html', context={'cart_products': cart_products})
