@@ -10,7 +10,7 @@ class DiscountCode(models.Model):
     discount = models.PositiveIntegerField()
 
     def __str__(self):        
-        return f"{self.code} {self.discount}"
+        return f"code: {self.code} discount: {self.discount}"
 
 class Cart(models.Model):
     """ Model to represent shopping cart """
@@ -19,7 +19,7 @@ class Cart(models.Model):
     products = models.ManyToManyField(Product, through='CartProduct')
     
     def __str__(self):
-       return f"{self.id} {self.user.username}"
+       return f"id:{self.id} username: {self.user.username}"
 
 
 class CartProduct(models.Model):
@@ -28,4 +28,4 @@ class CartProduct(models.Model):
     quantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.id} ${self.product_fk.price} ({self.quantity})"
+        return f"id: {self.id} price: ${self.product_fk.price} quantity: ({self.quantity})"

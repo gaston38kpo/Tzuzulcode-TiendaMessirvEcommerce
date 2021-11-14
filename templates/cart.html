@@ -29,32 +29,46 @@
 
 <div class="jumbotron jumbotron-fluid bg-white">
     <div class="container text-center">
-        <h1 class="display-4">Lista de Productos de </h1>
+        <h1 class="display-4">Lista de Productos de {{ cart.user }} </h1>
         <p class="lead">Aplicacion hecha en django.</p>
     </div>
 </div>
 
 <div class="container center">
+
+<a class="btn btn-danger btn-sm" href="{% url 'sort_cart_products' 'quantity_asc' %}">Ordenar por cantidad asc</a>
+<a class="btn btn-danger btn-sm" href="{% url 'sort_cart_products' 'quantity_desc' %}">Ordenar por cantidad desc</a>
+<a class="btn btn-danger btn-sm" href="{% url 'sort_cart_products' 'name_asc' %}">Ordenar por nombre asc</a>
+<a class="btn btn-danger btn-sm" href="{% url 'sort_cart_products' 'name_desc' %}">Ordenar por nombre desc</a>
+
     <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th scope="col">Producto</th>
-                <th scope="col">Precio</th>
+                <th scope="col">Precio (unidad)</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
             </tr>
         </thead>
         <tbody>
-            {% for product_cart in cart %}
+            {% for product_cart in cart_products %}
             <tr>
-                <td>{{ product_cart.name }}</td>
-                <td scope="row">{{ product_cart.price }}</td>
+                <td scope="row">{{ product_cart.product_fk.name }}</td>
+                <td scope="row">{{ product_cart.product_fk.price }}</td>
+                <td scope="row">{{ product_cart.quantity }}</td>
+                <!-- esto multiplica el precio por la cantidad -->
+                <td scope="row">{% widthratio product_cart.quantity 1 product_cart.product_fk.price %}</td> 
+
                 <td>
-                    <a class="btn btn-danger btn-sm" href="{% url 'delete_product_to_cart' product_cart.id %}">Eliminar</a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'delete_product_from_cart' product_cart.id %}">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div> 
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
