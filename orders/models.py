@@ -10,9 +10,9 @@ class Order(models.Model):
     discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True)
     products = models.ManyToManyField(Product, through='OrderProduct')
 
-
     def __str__(self):
-        return f"{self.id} {self.order_fk.user_fk.username} ${self.order_fk.total}"
+        return f"Order: {self.id} {self.user_fk.username} ${self.total}"
+        
 
 class OrderProduct(models.Model):
     order_fk = models.ForeignKey(Order, on_delete=models.CASCADE)
