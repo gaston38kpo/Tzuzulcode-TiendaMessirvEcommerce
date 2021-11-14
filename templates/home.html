@@ -35,7 +35,12 @@
             <p>Description: {{product.description}}</p>
             <form action="/cart/add/{{product.id}}", method="POST">
                 {% csrf_token %}
-                <input type="number", name="quantity", placeholder="Quantity", min=0>
+                <input 
+                    type="number", 
+                    name="quantity", 
+                    placeholder="Quantity", 
+                    max="{{product.stock}}",
+                    min="0">
                 <button>Add to Cart</button>
             </form>
         </div>
