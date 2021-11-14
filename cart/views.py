@@ -25,8 +25,15 @@ def add_product_to_cart(request, product_id):
         return redirect(redirect_url)
 
     cart = cart[0]
-    
-    product = Product.objects.filter(id=product_id)
+
+    # Check if product is already in cart
+    product = cart.products.filter(id=product_id)
+    product_is_already_in_cart = True
+
+    # If not, get from Product
+    if not product:
+        product_is_already_in_cart = False
+        product = Product.objects.filter(id=product_id)
 
     # TODO: 404 Product not found
     if not product:
@@ -39,11 +46,19 @@ def add_product_to_cart(request, product_id):
     if quantity_to_add <= 0:
         return redirect(redirect_url)
 
-    cart_product = CartProduct(
-        cart_fk=cart,
-        product_fk=product,
-        quantity=request.POST["quantity"]
-    )
+    if product_is_already_in_cart:
+        cart_product = CartProduct.objects.filter(cart_fk=cart, product_fk=product).get()
+        total_quantity = cart_product.quantity + quantity_to_add
+        # TODO: 400 Bad Request (invalid total quantity)
+        if total_quantity > product.stock:
+            return redirect(redirect_url)
+        cart_product.quantity = total_quantity
+    else:
+        cart_product = CartProduct(
+            cart_fk=cart,
+            product_fk=product,
+            quantity=quantity_to_add
+        )
 
     cart_product.save()
 
