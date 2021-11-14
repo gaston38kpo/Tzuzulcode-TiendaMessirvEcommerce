@@ -6,7 +6,7 @@ from products.models import Product
 # Create your views here.
 
 def add_product_to_cart(request, product_id):
-    redirect_url = request.META.get('HTTP_REFERER', '/home/')
+    redirect_url = request.META.get('HTTP_REFERER', 'home')
     if not request.method == "POST":
         return redirect(redirect_url)
 
