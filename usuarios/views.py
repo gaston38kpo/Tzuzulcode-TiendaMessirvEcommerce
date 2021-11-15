@@ -9,6 +9,7 @@ from cart.models import Cart
 from django.db.models import Q
 from decimal import Decimal, FloatOperation
 
+
 # Create your views here.
 
 def filter_page(request):
@@ -57,6 +58,8 @@ def register_view(request):
     
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
+        user_cart = Cart.objects.create(user=user)
+        user_cart.save()
         login(request, user)
         return redirect('home')
     return render(request, 'register.html')
