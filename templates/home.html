@@ -14,6 +14,44 @@
 </head>
 
 <body>
+<<<<<<< HEAD
+    <div>LOGO</div>
+    
+    {% if request.user.is_authenticated %}
+        <div><a href="/logout">LOGOUT</a></div>
+    {% else %}
+        <div><a href="/login">LOGIN</a></div>
+        <div><a href="/register">REGISTER</a></div>
+    {% endif %}
+    
+    {% if request.user.is_staff %}
+        <div><a href="/admin">ADMIN AREA</a></div>
+    {% endif %}
+
+    <div>FILTER
+        <form method="POST">
+        {% csrf_token %}
+            <input type="text" placeholder="Escribe tu producto" name="buscar"/>
+            <button type="submit" >Enviar</button>
+        </form>
+    </div>
+
+    <div>
+        {% for product in products %}
+        <div>
+            <img src={{product.img_path}}>
+            <p>Name: {{product.name}}</p>
+            <p>Price: {{product.price}}</p>
+            {% if product.stock == 0 %}
+                <p>OUT OF STOCK</p>
+            {% endif %}            
+            <p>Description: {{product.description}}</p>
+            <form action="/cart/add/{{product.id}}", method="POST">
+                {% csrf_token %}
+                <input type="number", name="quantity", placeholder="Quantity", min=0>
+                <button>Add to Cart</button>
+            </form>
+=======
 
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -38,6 +76,7 @@
                     {% endif %}
                 </div>
             </div>
+>>>>>>> 04cd840a4f726447713c58a627e96c9bb11d3690
         </div>
     </nav>
 

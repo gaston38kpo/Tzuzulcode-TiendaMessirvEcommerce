@@ -68,7 +68,12 @@ def add_product_to_cart(request, product_id):
         )
 
     cart_product.save()
+    
 
+<<<<<<< HEAD
+    return redirect(request.META.get('HTTP_REFERER'))
+
+=======
     return redirect(redirect_url)
     
 def cart_view(request):
@@ -156,3 +161,4 @@ def add_remove_one_product(request, quantity_func, product_id):
         
     return redirect('cart')
     
+>>>>>>> 04cd840a4f726447713c58a627e96c9bb11d3690
