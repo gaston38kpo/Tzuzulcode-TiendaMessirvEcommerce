@@ -44,26 +44,15 @@
         <form class="row g-3" action="/login/" method="post">
         {% csrf_token %}
 
-          <label for="staticEmail2" class="visually-hidden">Username</label>
-          <input type="text" class="form-control" id="staticEmail2" placeholder="Username" name="username">
+          <label for="username" class="visually-hidden">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Username" name="username">
           <label for="inputPassword2" class="visually-hidden">Password</label>
           <input type="password" class="form-control" id="inputPassword2" placeholder="Password" name="password">
 
           <button type="submit" class="btn btn-primary mb-3">Iniciar sesión</button>
           <a class="btn btn-primary mb-3" href="{% url 'register' %}" role="button">Registrarse</a>
       </form>
-    </div>
-
-
-        <!-- <form action="/login/" method="post">
-            {% csrf_token %}
-
-            <input type="text", name="username">
-            
-            <input type="password" name="password">
-
-            <button type="submit">INICIAR SESIÓN</button> -->
-            
+    </div>            
         <p> {{error}} </p>
     {% endif %}
     
