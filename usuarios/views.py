@@ -6,8 +6,6 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from products.models import Product
 
-from django.views import generic
-
 # Create your views here.
 
 def home_view(request):

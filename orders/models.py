@@ -1,21 +1,25 @@
 from django.db import models
-from usuarios.models import Customer
+from django.contrib.auth.models import User
+from cart.models import DiscountCode
+from products.models import Product
 
-class Order_detail(models.Model):
-    order_detail_id = models.AutoField(primary_key=True)
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+class Order(models.Model):
+    user_fk = models.ForeignKey(User, on_delete=models.CASCADE)    
     total = models.DecimalField(max_digits=10, decimal_places=2)
-    order_status = models.BooleanField(default=False)
+    order_status = models.BooleanField(default=False)    
+    discount_code = models.ForeignKey(DiscountCode, on_delete=models.CASCADE, null=True)
+    products = models.ManyToManyField(Product, through='OrderProduct')
 
     def __str__(self):
-        return str(self.order_detail_id)
+        return f"Order: {self.id} {self.user_fk.username} ${self.total}"
+        
 
-class Order_item(models.Model):
-    order_item_id = models.AutoField(primary_key=True)
-    order_detail_id = models.ForeignKey(Order_detail, on_delete=models.CASCADE)
+class OrderProduct(models.Model):
+    order_fk = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product_fk = models.ForeignKey(Product,on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
-        return str(self.order_item_id)
+        return f"{self.id} {self.order_fk.user_fk.username} ${self.price * self.quantity}"
         
