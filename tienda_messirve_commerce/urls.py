@@ -29,14 +29,10 @@ from orders.views import order_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('', home_view, name='home'),
-<<<<<<< HEAD
-    path('filter_product/', filter_page, name='product'),
-=======
     path('home/', home_view, name='home'),
-
->>>>>>> 04cd840a4f726447713c58a627e96c9bb11d3690
+    path('filter_product/', filter_page, name='product'),
+    
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
