@@ -20,7 +20,13 @@
         <div><a href="/admin">ADMIN AREA</a></div>
     {% endif %}
 
-    <div>FILTER</div>
+    <div>FILTER
+        <form method="POST">
+        {% csrf_token %}
+            <input type="text" placeholder="Escribe tu producto" name="buscar"/>
+            <button type="submit" >Enviar</button>
+        </form>
+    </div>
 
     <div>
         {% for product in products %}

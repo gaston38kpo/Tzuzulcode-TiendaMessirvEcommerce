@@ -6,8 +6,21 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from products.models import Product
 from cart.models import Cart
+from django.db.models import Q
+from decimal import Decimal, FloatOperation
 
 # Create your views here.
+
+def filter_page(request):
+    busqueda = request.POST.get("buscar") 
+    products = Product.objects.all()
+
+    if busqueda:
+        products = Product.objects.filter(
+            Q(name = busqueda) 
+        ).distinct()
+    
+    return render(request, 'home.html', {'products': products})
 
 def home_view(request):
     context = {}

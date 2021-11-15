@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from usuarios.views import home_view
+from usuarios.views import filter_page, home_view
 from usuarios.views import login_view
 from usuarios.views import logout_view
 from usuarios.views import register_view
@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', home_view, name='home'),
     path('', home_view, name='home'),
+    path('filter_product/', filter_page, name='product'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),

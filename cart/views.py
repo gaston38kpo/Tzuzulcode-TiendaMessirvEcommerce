@@ -33,5 +33,7 @@ def add_product_to_cart(request, product_id):
     )
 
     cart_product.save()
+    
 
     return redirect(request.META.get('HTTP_REFERER'))
+
